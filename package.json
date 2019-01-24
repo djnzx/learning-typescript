@@ -1,0 +1,22 @@
+{
+  "name": "ts-start2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "all": "npm run build && npm run start",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build-ts",
+    "build-ts": "tsc"
+  },
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "express": "^4.16.4",
+    "sequelize": "^4.42.0",
+    "sequelize-typescript": "^0.6.1",
+    "pg": "^7.4.0"
+  },
+  "author": "alexr",
+  "license": "ISC"
+}
