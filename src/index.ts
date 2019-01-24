@@ -695,12 +695,7 @@ const function08 = () => {
     console.log(f2("AleX"));
 };
 //function08();
-import Collections = require('typescript-collections');
-var mySet = new Collections.Set<number>();
-mySet.add(123);
-
-
-
+const Collections = require('typescript-collections');
 
 
 // find_all();
