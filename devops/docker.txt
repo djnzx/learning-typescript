@@ -1,0 +1,28 @@
+###
+# https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198
+# https://docs.docker.com/engine/examples/postgresql_service/
+###
+
+brew install docker
+brew install docker-compose
+brew install docker-machine
+docker version
+
+docker pull postgres:9.6
+mkdir ~/pg_data
+docker run -d --rm -p 5432:5432 -e POSTGRES_PASSWORD=secret -v ~/pg_data:/var/lib/postgresql/data postgres:9.6
+docker stop ...
+
+docker image ls
+docker ps
+docker rm ...
+docker stop ...
+
+docker pull mongo:latest
+mkdir ~/mongo_data
+docker run -d --rm -p 27017:27017 -v ~/mongo_data:/mongo_data/db mongo:latest
+docker stop $(docker ps ) ...
+docker rm $(docker ps -a -q)
+
+docker pull redis:3.2
+docker run -d --rm -p 6379:6379 redis:3.2
