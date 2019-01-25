@@ -903,13 +903,58 @@ const enums01 = () => {
         Right = "RIGHT",
     }
 
+    enum E { X }
+    let x = E.X;
+    console.log(typeof x); // number
+    console.log(x === E.X); // T
+    console.log(x == E.X); // T
+    console.log(x == 0); // T
+    console.log(x === 0); // T
+    console.log(x); // 0
 
 };
-enums01();
+//enums01();
 const enums02 = () => {
+    enum ShapeKind {
+        Circle,
+        Square,
+    }
+
+    interface Circle {
+        kind: ShapeKind;
+        //kind: ShapeKind.Circle;
+        radius: number;
+    }
+
+    interface Square {
+        kind: ShapeKind.Square;
+        sideLength: number;
+    }
+
+    let c: Circle = {
+        kind: ShapeKind.Square,
+        //    ~~~~~~~~~~~~~~~~ Error!
+        radius: 100,
+    }
+
+    enum Enum {
+        A = 1,
+        B,
+        C = 2
+    }
+    console.log(Enum.A);
+    console.log(Enum.B);
+    console.log(Enum.C);
+    let e1 = Enum.B;
+    let e2 = Enum.C;
+    console.log(e1 === e2);
 
 };
 enums02();
+const enums03 = () => {
+
+};
+enums03();
 
 
 
