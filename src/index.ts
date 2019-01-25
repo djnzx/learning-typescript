@@ -950,11 +950,39 @@ const enums02 = () => {
     console.log(e1 === e2);
 
 };
-enums02();
-const enums03 = () => {
+//enums02();
+const types01 = () => {
+    let x = [0, 1, null];
+    console.log(typeof x); // object
+};
+//types01();
+const types02 = () => {
+    class Animal {}
+    class Rhino extends Animal {}
+    class Elephant extends Animal {}
+    class Snake extends Animal {}
+
+    let zoo1 = [new Rhino(), new Elephant(), new Snake()];
+    console.log(typeof zoo1); // object
+
+    let zoo2: Animal[] = [new Rhino(), new Elephant(), new Snake()];
+    console.log(typeof zoo2); // object
+
+    function createZoo(): Animal[] {
+        return [new Rhino(), new Elephant(), new Snake()];
+    }
+    let zoo3 = createZoo();
+    console.log(typeof zoo3); // object
+};
+types02();
+const types03 = () => {
 
 };
-enums03();
+types03();
+const types04 = () => {
+
+};
+types04();
 
 
 
