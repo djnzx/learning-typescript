@@ -861,7 +861,55 @@ const generic08 = () => {
 
 };
 //generic08();
+const enums01 = () => {
+    enum Direction0 {
+        Up,
+        Down,
+        Left,
+        Right,
+    }
+    enum Direction1 {
+        Up = 1,
+        Down, //2
+        Left = 5,
+        Right, //6
+    }
+    let up0 = Direction0.Up;
+    let up1 = Direction1.Up;
+    console.log(up0 === Direction0.Up);
+    console.log(up1 === 1);
 
+    console.log(Direction1.Up);
+    console.log(Direction1.Down);
+    console.log(Direction1.Left);
+    console.log(Direction1.Right);
+
+    let getSomeValueA = () => 5;
+    let getSomeValueB = () => 11;
+
+    enum E {
+        A = getSomeValueA(),
+        // B, // error! 'A' is not constant-initialized, so 'B' needs an initializer
+        B = getSomeValueB()
+    }
+    E.A;
+    E.B;
+
+    //string ENUMS
+    enum DirectionS {
+        Up = "UP",
+        Down = "DOWN",
+        Left = "LEFT",
+        Right = "RIGHT",
+    }
+
+
+};
+enums01();
+const enums02 = () => {
+
+};
+enums02();
 
 
 
