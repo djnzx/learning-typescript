@@ -974,15 +974,296 @@ const types02 = () => {
     let zoo3 = createZoo();
     console.log(typeof zoo3); // object
 };
-types02();
+//types02();
 const types03 = () => {
+    interface Named1 {
+        name: string;
+    }
+    interface Named2 {
+        name: string;
+        location: string;
+    }
+    let x: Named1;
+    let y: Named2;
+
+    // y's inferred type is { name: string; location: string; }
+    y = { name: "Alice", location: "Seattle" };
+    console.log(y);
+
+    x = y; // won't be narrowed
+    console.log(x);
+    console.log(typeof x); // obj
 
 };
-types03();
+//types03();
 const types04 = () => {
+    let items = [1, 2, 3];
+    items.forEach(item => console.log(item));
+    items
+        .filter(item => item %2 == 1)
+        .forEach((val, idx, arr) => console.log(val, idx, arr)); // it saves index
+};
+//types04();
+const types05 = () => {
+    enum EventType { Mouse, Keyboard }
+
+    interface Event { timestamp: number; }
+    interface MouseEvent extends Event { x: number; y: number }
+    interface KeyEvent extends Event { keyCode: number }
+
+    function listenEvent(eventType: EventType, handler: (n: Event) => void) {
+    }
+
+// Unsound, but useful and common
+    listenEvent(EventType.Mouse, (e: MouseEvent) => console.log(e.x + "," + e.y));
+
+// Undesirable alternatives in presence of soundness
+    listenEvent(EventType.Mouse, (e: Event) => console.log((<MouseEvent>e).x + "," + (<MouseEvent>e).y));
+    listenEvent(EventType.Mouse, <(e: Event) => void>((e: MouseEvent) => console.log(e.x + "," + e.y)));
+
+// Still disallowed (clear error). Type safety enforced for wholly incompatible types
+    //listenEvent(EventType.Mouse, (e: E) => console.log(e));
+
+    enum Status { Ready, Waiting };
+    enum Color { Red, Blue, Green };
+    let st = Status.Ready;
+    let co = Color.Red;
+    let x : number = st;
+    let y : number = co;
+    x = y;
+};
+//types05();
+const types06 = () => {
+    // intersection
+    function extend<T, U>(first: T, second: U): T & U {
+        let result = <T & U>{};
+        for (let id in first) {
+            (<any>result)[id] = (<any>first)[id];
+        }
+        for (let id in second) {
+            if (!result.hasOwnProperty(id)) {
+                (<any>result)[id] = (<any>second)[id];
+            }
+        }
+        return result;
+    }
+
+    class Person {
+        constructor(public name: string) { }
+    }
+    interface Loggable {
+        log(): void;
+    }
+    class ConsoleLogger implements Loggable {
+        log() {
+            // ...
+        }
+    }
+    var jim = extend(new Person("Jim"), new ConsoleLogger());
+    var n = jim.name;
+    jim.log();
 
 };
-types04();
+//types06();
+const types07 = () => {
+    interface Bird {
+        fly();
+        layEggs();
+    }
+
+    interface Fish {
+        swim();
+        layEggs();
+    }
+
+    function getSmallPet(): Fish | Bird {
+        return null;
+    }
+
+    let p = getSmallPet();
+    if ((<Fish>p).swim) {
+        (<Fish>p).swim();
+    }
+
+    function isFish(pet: Fish | Bird): pet is Fish { // check + typecast simultaneously for future IFs
+        return (<Fish>pet).swim !== undefined;
+    }
+
+    function isFish2(pet: Fish | Bird): boolean {
+        return (<Fish>pet).swim !== undefined;
+    }
+
+    if (isFish(p)) {
+        p.swim();
+    }
+    else {
+        p.fly();
+    }
+
+};
+//types07();
+const types08 = () => {
+    function isNumber(x: any): x is number {
+        return typeof x === "number";
+    }
+    function isString(x: any): x is string {
+        return typeof x === "string";
+    }
+
+    let pad = 1;
+    if (isNumber(pad)) {
+        console.log("number:", pad.toString());
+    }
+    if (isString(pad)) {
+        console.log("string:", pad, "length:", pad.length);
+    }
+};
+//types08();
+const types09 = () => {
+    function broken(name: string | null): string {
+        function postfix(epithet: string) {
+            return name.charAt(0) + '.  the ' + epithet; // error, 'name' is possibly null
+        }
+        name = name || "Bob";
+        return postfix("great");
+    }
+
+    function fixed(name: string | null): string {
+        function postfix(epithet: string) {
+            return name!.charAt(0) + '.  the ' + epithet; // ok
+        }
+        name = name || "Bob";
+        return postfix("great");
+    }
+
+    console.log(broken(null));
+    console.log(fixed(null));
+};
+//types09();
+const types10 = () => {
+    interface Padder {
+        getPaddingString(): string
+    }
+
+    class SpaceRepeatingPadder implements Padder {
+        constructor(private numSpaces: number) { }
+        getPaddingString() {
+            return Array(this.numSpaces + 1).join(" ");
+        }
+    }
+
+    class StringPadder implements Padder {
+        constructor(private value: string) { }
+        getPaddingString() {
+            return this.value;
+        }
+    }
+
+    function getRandomPadder() {
+        return Math.random() < 0.5 ?
+            new SpaceRepeatingPadder(4) :
+            new StringPadder("  ");
+    }
+
+// Type is 'SpaceRepeatingPadder | StringPadder'
+    let padder: Padder = getRandomPadder();
+
+    if (padder instanceof SpaceRepeatingPadder) {
+        padder; // type narrowed to 'SpaceRepeatingPadder'
+    }
+    if (padder instanceof StringPadder) {
+        padder; // type narrowed to 'StringPadder'
+    }
+};
+//types10();
+const types11 = () => {
+    type Easing = "ease-in" | "ease-out" | "ease-in-out";
+    class UIElement {
+        animate(dx: number, dy: number, easing: Easing) {
+            if (easing === "ease-in") {
+                // ...
+            }
+            else if (easing === "ease-out") {
+            }
+            else if (easing === "ease-in-out") {
+            }
+            else {
+                console.log(1);
+                // error! should not pass null or undefined.
+            }
+        }
+    }
+};
+//types11();
+const types12 =() => {
+    interface Square {
+        kind: "square";
+        size: number;
+    }
+    interface Rectangle {
+        kind: "rectangle";
+        width: number;
+        height: number;
+    }
+    interface Circle {
+        kind: "circle";
+        radius: number;
+    }
+    type Shape = Square | Rectangle | Circle;
+
+    function area(s: Shape) {
+        switch (s.kind) {
+            // this case will also make a typecasting for variable `s`
+            case "square": return s.size * s.size;
+            case "rectangle": return s.height * s.width;
+            case "circle": return Math.PI * s.radius ** 2;
+        }
+    }
+
+};
+//types12();
+const types13 = () => {
+    function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {
+        return names.map(n => o[n]);
+    }
+
+    interface Person {
+        name: string;
+        age: number;
+    }
+
+    let person: Person = {
+        name: 'Jarid',
+        age: 35
+    };
+
+    let strings: string[] = pluck(person, ['name']); // ok, string[]
+    console.log(strings);
+
+
+    type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
+    type Unpacked<T> =
+        T extends (infer U)[] ? U :
+            T extends (...args: any[]) => infer U ? U :
+                T extends Promise<infer U> ? U :
+                    T;
+
+    type T0 = Unpacked<string>;  // string
+    type T1 = Unpacked<string[]>;  // string
+    type T2 = Unpacked<() => string>;  // string
+    type T3 = Unpacked<Promise<string>>;  // string
+    type T4 = Unpacked<Promise<string>[]>;  // Promise<string>
+    type T5 = Unpacked<Unpacked<Promise<string>[]>>;  // string
+};
+//types13();
+const symbol01 = () => {
+
+    let s1 = Symbol("abc");
+    let s2 = Symbol(42);
+
+
+};
+symbol01();
 
 
 
