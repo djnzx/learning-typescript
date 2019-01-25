@@ -695,7 +695,174 @@ const function08 = () => {
     console.log(f2("AleX"));
 };
 //function08();
-const Collections = require('typescript-collections');
+const collectionsIdeas = () => {
+    const Collections = require('typescript-collections');
+    let s = new Collections.Set();
+    s.add(1);
+    s.add(2);
+    s.add("abc");
+    s.add("cde");
+    s.forEach((item)=>{
+        if (typeof item === 'number') {
+            console.log("number:", item);
+        } else if (typeof item === 'string') {
+            console.log("string:", item);
+        }
+    });
+};
+//collectionsIdeas();
+const generic01 = () => {
+    function convert1<T>(arg: T): T {
+        return arg;
+    }
+    let rn3: number = convert1<number>(1); // explicit
+    let rn1         = convert1(1); // implicit
+    let rn2: number = convert1(1); // implicit
+    let rs3: string = convert1<string>("abc");  // explicit
+    let rs1         = convert1("abc"); // implicit
+    let rs2: string = convert1("abc"); // implicit
+
+    console.log(typeof rn1);
+    console.log(typeof rn2);
+    console.log(typeof rn3);
+    console.log(typeof rs1);
+    console.log(typeof rs2);
+    console.log(typeof rs3);
+};
+//generic01();
+const generic02 = () => {
+    interface Having {
+        opt1: number;
+        opt2: string;
+    }
+    function convert2<T extends Having>(arg: T): T {
+        console.log(arg.opt1);
+        console.log(arg.opt2);
+        return arg;
+    }
+    convert2({opt1:1, opt2:"abc"});
+    convert2({opt1:1, opt2:"abc", opt:true});
+};
+//generic02();
+const generic03 = () => {
+    function identity<T>(arg: T): T {
+        return arg;
+    }
+    let ident1 = identity;
+    console.log(ident1(1));
+
+    let myIdentity1                   = identity;
+    let myIdentity2: <T>(arg: T) => T = identity;
+    let myIdentity3: <U>(arg: U) => U = identity;
+    let myIdentity4: {<T>(arg: T): T} = identity;
+
+    let number1: number = myIdentity1<number>(1);
+    let number2         = myIdentity2<number>(1);
+};
+//generic03();
+const generic04 = () => {
+    interface InterfaceFn1 {
+        <T>(arg: T): T;
+    }
+    function identityF1<T>(arg: T): T {
+        return arg;
+    }
+    let identity1: InterfaceFn1 = identityF1;
+    identity1(1);
+    identity1("abc");
+
+    interface InterfaceFn2<T> {
+        (arg: T): T;
+    }
+
+    function identityF2<T>(arg: T): T {
+        return arg;
+    }
+    let identity2: InterfaceFn2<number> = identityF2;
+    identity2(1);
+    // identity2("2"); // will produce error because it already has a type opened
+};
+//generic04();
+const generic05 = () => {
+    class GenericNumber<T> {
+        zeroValue: T;
+        add: (x: T, y: T) => T;
+        add1: (x: number, y: number) => number; // we have type - we can omit implementation
+        add2 (x: number, y: number): number { // we don't have type - we should write implementation right now
+            return x + y;
+        };
+    }
+
+    let myGenericNumber = new GenericNumber<number>();
+    myGenericNumber.zeroValue = 0;
+    myGenericNumber.add = function(x, y) { return x + y; };
+    myGenericNumber.add = (x, y) => x + y;
+    myGenericNumber.add = (x: number, y: number): number => x + y;
+    myGenericNumber.add1 = function(x, y) { return x + y; };
+    myGenericNumber.add2 = function(x, y) { return x - y; };
+    myGenericNumber.add2 = (x, y) => x - y;
+    myGenericNumber.add2 = (x: number, y: number): number => x - y;
+    // myGenericNumber.add2 = (x: string, y: string): string => x - y;
+    // we can't change type after we have opened the generic to specific type
+
+    let stringNumeric = new GenericNumber<string>();
+    stringNumeric.zeroValue = "";
+    stringNumeric.add = function(x, y) { return x + y; };
+
+    console.log(stringNumeric.add(stringNumeric.zeroValue, "test"));
+};
+//generic05();
+const generic06 = () => {
+    function getProperty<T, K extends keyof T>(obj: T, key: K) {
+        return obj[key];
+    }
+
+    let x = { a: 1, b: 2, c: 3, d: 4 };
+    console.log(getProperty(x, "a"));
+};
+//generic06();
+const generic07 = () => {
+    function create<T>(claz: {new(): T; }): T {
+        return new claz();
+    }
+    let a = create(Array);
+    console.log(typeof a); // object
+    console.log(a instanceof Array); // true
+};
+//generic07();
+const generic08 = () => {
+    class BeeKeeper {
+        hasMask: boolean;
+    }
+    class ZooKeeper {
+        nametag: string;
+    }
+    class Animal {
+        numLegs: number;
+    }
+    class Bee extends Animal {
+        keeper: BeeKeeper;
+    }
+    let b = new Bee();
+    let m1 = b.keeper.hasMask;
+    let n1 = b.numLegs;
+    class Lion extends Animal {
+        keeper: ZooKeeper;
+    }
+    let l = new Lion();
+    let m2 = l.keeper.nametag;
+    let n2 = l.numLegs;
+
+    function createInstance<A extends Animal>(c: new () => A): A {
+        return new c();
+    }
+    createInstance(Lion).keeper.nametag; // type checking does work!
+    createInstance(Bee).keeper.hasMask; // type checking does work!
+
+};
+//generic08();
+
+
 
 
 // find_all();
