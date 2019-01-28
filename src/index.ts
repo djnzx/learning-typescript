@@ -14,7 +14,7 @@ import * as all from "./c_all";
 import "./wierd" // doesn't work
 import f from "./def_class"
 import x2 from "./def_func"
-
+import z = require("./def_1")
 const importClasses0 = () => {
     let c2 = new Class2();
     c2.f2 = 42;
@@ -85,3 +85,4 @@ const interfacesWoImport = () => {
     console.log(new Person());
 };
 //interfacesWoImport();
+console.log(z);
