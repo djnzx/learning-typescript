@@ -26,3 +26,11 @@ docker rm $(docker ps -a -q)
 
 docker pull redis:3.2
 docker run -d --rm -p 6379:6379 redis:3.2
+
+INSTALLED @ A-Mobile
+=========
+postgres:9.6
+mysql:latest
+mongo:latest
+redis:latest
+
