@@ -471,7 +471,7 @@ const caseAdvanced = () => {
         function Greeter2(message) {
             this.greeting = message;
         }
-        Greeter2.prototype.greet = function () {
+        Greeter2.prototype.access = function () {
             return "Hello, " + this.greeting;
         };
         return Greeter2;
