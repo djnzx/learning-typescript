@@ -16,7 +16,7 @@
     "pg": "^7.4.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^4.42.0",
-    "sequelize-typescript": "^0.6.1",
+    "sequelize-typescript": "^0.6.1"
   },
   "author": "alexr",
   "license": "ISC"

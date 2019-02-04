@@ -1,4 +1,4 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
 // variable to access to the ANNOTATION in runtime
 const key_ = Symbol("format7");
