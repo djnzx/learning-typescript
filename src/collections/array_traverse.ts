@@ -4,27 +4,33 @@ namespace ArrayTraverse {
   ss.push('Tuesday');
   ss.push('Wednesday');
 
-// #1 - only values via direct access
-  for (let i = 0; i < ss.length; i++) {
-    console.log(ss[i]);
-  }
-
-// #2 - only indexes
+// #0 - only indexes
   for (let item in ss) {
     console.log(item);
   }
 
-// #3 - only values via foreach construction
+// #1 for - values via direct access
+  for (let i = 0; i < ss.length; i++) {
+    console.log(ss[i]);
+  }
+
+// #1 while - values via direct access
+  let index = 0;
+  while (index < ss.length) {
+    console.log(ss[index++]);
+  }
+
+// #2 - only values via foreach construction
   for (let item of ss) {
     console.log(item);
   }
 
-// #4 - custom callback
+// #3 - custom callback
   ss.forEach((val, index, whole) => {
     console.log(`index: ${index} value: ${val} whole structure: ${whole}`);
   });
 
-// #5 - via IterableIterator
+// #4 - via IterableIterator
 //let ent = ss.keys(); // IterableIterator<number>; keys only
   let ent = ss.entries(); // IterableIterator<[number, T]>; tuples: [ 0, 'Monday' ]
   let iterator = ent[Symbol.iterator]();

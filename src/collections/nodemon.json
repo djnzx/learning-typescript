@@ -2,5 +2,5 @@
   "watch": ["."],
   "ext": "ts",
   "ignore": ["./**/*.spec.ts"],
-  "exec": "ts-node ./array_operations.ts"
+  "exec": "ts-node ./object_props.iteration.ts"
 }
