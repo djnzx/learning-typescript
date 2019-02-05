@@ -2,7 +2,7 @@
     "compilerOptions": {
         //"strictNullChecks": true,
         "module": "commonjs", // add this
-        "target": "es2017",
+        "target": "es2016",
         "outDir": "dist",
         "baseUrl": "src",
         "experimentalDecorators": true
