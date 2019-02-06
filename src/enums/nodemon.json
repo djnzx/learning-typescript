@@ -2,5 +2,5 @@
   "watch": ["."],
   "ext": "ts",
   "ignore": ["./**/*.spec.ts"],
-  "exec": "ts-node ./array_of_objects.ts"
+  "exec": "ts-node ./enums.ts"
 }
