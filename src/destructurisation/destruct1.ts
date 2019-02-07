@@ -40,4 +40,26 @@ namespace Destruct1 {
   console.log(n); // Alex
   console.log(rest); // { age: 21, smart: 13 }
 
+  type T1 = [number, string];
+  let t1: T1 = [1, "Hello"];
+  let t2: T1 = [2, "World"];
+  let [z1, z2] = t1;
+  console.log(z1);
+  console.log(z2);
+
+  let ints = [1,2,3];
+  let[_1st, _2nd, _3rd] = ints;
+  let[_1sta, _rest] = ints; // 1, 2
+  let[_1st1, ..._rest1] = ints; // 1, [2, 3]
+
+  console.log(_1st);
+  console.log(_2nd);
+  console.log(_3rd);
+
+  console.log(_1sta);
+  console.log(_rest);
+  console.log(_1st1);
+  console.log(_rest1);
+
+
 }
