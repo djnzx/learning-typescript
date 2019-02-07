@@ -1,6 +1,7 @@
 {
   "name": "ts-start2",
-  "version": "1.0.0",
+  "version": "1.2.3",
+  "version11": "11.12.13",
   "description": "",
   "main": "index.js",
   "scripts": {
