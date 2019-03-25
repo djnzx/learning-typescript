@@ -13,11 +13,13 @@
   },
   "dependencies": {
     "@types/node": "^10.12.18",
+    "chalk": "^2.4.2",
     "express": "^4.16.4",
     "pg": "^7.4.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^4.42.0",
-    "sequelize-typescript": "^0.6.1"
+    "sequelize-typescript": "^0.6.1",
+    "typescript": "^3.3.4000"
   },
   "author": "alexr",
   "license": "ISC"
