@@ -7,6 +7,7 @@ class Properties {
   static readonly PG_PORT = 'PG_PORT';
   static readonly PG_NAME = 'PG_NAME';
   static readonly PG_ARGS = 'PG_ARGS';
+  static readonly API_DROP = 'API_DROP';
 }
 
 const varsRequired = [
@@ -22,7 +23,7 @@ const isEnvVariableSet = (key: string) => {
   return process.env[key] === undefined;
 };
 
-const env = (key: string) => {
+const envVar = (key: string) => {
   return process.env[key];
 };
 
@@ -36,6 +37,6 @@ varsRequired.forEach(key => {
 const message = (variable: string, value: string) => `Environment variable ${variable} is ${value}`;
 
 varsRequired.forEach(variable => {
-  const value = env(variable);
+  const value = envVar(variable);
   console.log(message(chalk.green(variable), chalk.green(value)));
 });
