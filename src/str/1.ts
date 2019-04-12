@@ -1,3 +1,3 @@
-const sl = 'abcdef';
+const sl = 'B|abcdef;';
 
-console.log(sl.slice(2));
+console.log(sl.slice(2, sl.length-1));
