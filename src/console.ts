@@ -1,0 +1,5 @@
+console.log('Black color text with no icon')
+console.info('Blue color text with icon')
+console.debug('Pure black color text')
+console.warn('Yellow color text with icon')
+console.error('Red Color text with icon')
