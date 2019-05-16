@@ -1,4 +1,4 @@
-import { log } from 'ts-log-decorator';
+import { log } from "ts-log-decorator";
 
 @log()
 class User {
