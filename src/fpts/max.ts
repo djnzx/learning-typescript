@@ -22,6 +22,20 @@ const getStrLn: Task<string> = new Task(
     })
 )
 
+const getStrLn1 = (): Task<string> => new Task(
+  () =>
+    new Promise(resolve => {
+      const rl = createInterface({
+        input: process.stdin,
+        output: process.stdout
+      })
+      rl.question('> ', answer => {
+        rl.close()
+        resolve(answer)
+      })
+    })
+)
+
 const putStrLn = (message: string): Task<void> => fromIO(log(message))
 
 const random = fromIO(randomInt(1, 5))
@@ -68,5 +82,14 @@ const main: Task<void> = putStrLn('What is your name?')
   .chain(() => getStrLn)
   .chain(name => putStrLn(`Hello, ${name} welcome to the game!`).chain(() => gameLoop(name)))
 
-// tslint:disable-next-line: no-floating-promises
-main.run()
+// main.run()
+
+// console.log(getStrLn)
+// console.log(getStrLn1)
+
+const f1: void = console.log('f1'); // f1
+const f2 = (): void => console.log('f2');
+
+console.log(f1); // undefined
+console.log(f2); // [Function: f2]
+f2(); // f2

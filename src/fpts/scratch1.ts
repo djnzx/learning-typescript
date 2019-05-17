@@ -51,3 +51,13 @@ source_data.forEach(item =>
     ))
     .then(s => console.log(s))
 );
+
+// parallel:
+import { task } from 'fp-ts/lib/Task'
+import { array } from 'fp-ts/lib/Array'
+
+const tasks = [task.of(1), task.of(2)];
+array
+  .sequence(task)(tasks)
+  .run()
+  .then(console.log);
