@@ -7,6 +7,7 @@ class Flow {
   }
 
   map_lazy(f: (z_: number) => number): Lazy {
+    console.log('flow.mapping.to lazy');
     return new Lazy(this.val, f);
   }
 
@@ -18,7 +19,9 @@ class Flow {
 }
 
 class Lazy {
-  constructor(readonly val: number, readonly defer_f: (z_: number) => number) {}
+  constructor(
+    readonly val: number,
+    readonly defer_f: (z_: number) => number) {}
 
   fold(): Flow {
     console.log('folding lazy');
@@ -41,10 +44,10 @@ const mapper2_func = () => mapper2;
 
 console.log('--- starting...');
 
-const x = new Flow(1)
-  .map(mapper1)
-  .map_lazy(mapper2)
-  .fold()
-  .fold()
+const x = new Flow(1) // Flow
+  .map(mapper1)           // Flow
+  .map_lazy(mapper2)      // Lazy
+  .fold()                 // Flow
+  .fold()                 // number
 
 console.log(x);
