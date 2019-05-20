@@ -1,11 +1,9 @@
-import * as assert from 'assert';
-
 function pipe(...fns: Array<Function>): Function {
   const len = fns.length - 1;
-  return function(this: any, x: any) {
+  return async function(this: any, x: any) {
     let y = x;
     for (let i = 0; i <= len; i++) {
-      y = fns[i].call(this, y)
+      y = await fns[i].call(this, y)
     }
     return y
   }
@@ -67,13 +65,13 @@ console.log(x);
 
 const f_ = (n: number) => Promise.resolve(n + 1);
 const g_ = (n: number) => Promise.resolve(n * 2);
-// const h_ = (n: number) => Promise.resolve(n * 3);
+const h_ = (n: number) => Promise.resolve(n * 3);
 
 const promise_composition = async () =>
   await pipe(
     f_,
     g_,
-    // h_,
+    h_,
   )(2);
 // 1. f_: 2+1 = 3
 // 2. g_: 3*2 = 6
