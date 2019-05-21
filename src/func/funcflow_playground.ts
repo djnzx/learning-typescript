@@ -6,3 +6,6 @@ FuncFlow.from(() => 2) // 2
   .chain( x => Promise.resolve(x * 3) ) // 18
   .chain( x => x + 1 ) // 19
   .then(console.log);
+
+FuncFlow.from(() => 77)
+  .then(console.log);

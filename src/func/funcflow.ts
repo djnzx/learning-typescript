@@ -1,4 +1,13 @@
-import { pipe_async2 } from "./pipes";
+function pipe_a(fns: Array<Function>): Function {
+  const len = fns.length - 1;
+  return async function(this: any, x: any) {
+    let y = x;
+    for (let i = 0; i <= len; i++) {
+      y = await fns[i].call(this, y)
+    }
+    return y
+  }
+}
 
 export class FuncFlow {
   private functions: Array<Function> = [];
@@ -17,7 +26,7 @@ export class FuncFlow {
   }
 
   public async fold() {
-    return pipe_async2(this.functions)();
+    return pipe_a(this.functions)();
   }
 
   public then(f: Function) {
