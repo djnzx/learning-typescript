@@ -2,5 +2,5 @@
   "watch": ["."],
   "ext": "ts",
   "ignore": ["./**/*.spec.ts"],
-  "exec": "ts-node ./funcflow_playground.ts"
+  "exec": "ts-node ./funcflow_playground_v2.ts"
 }
