@@ -1,12 +1,9 @@
-function pipe_a(fns: Array<Function>): Function {
-  const len = fns.length - 1;
-  return async function(this: any, x: any) {
-    let y = x;
-    for (let i = 0; i <= len; i++) {
-      y = await fns[i].call(this, y)
-    }
-    return y
+async function pipe_a2(fns: Array<Function>): Promise<any> {
+  let y = await fns[0].call(this);
+  for (let i = 1; i < fns.length; i++) {
+    y = await fns[i].call(this, y);
   }
+  return y;
 }
 
 export class FuncFlow {
@@ -26,7 +23,7 @@ export class FuncFlow {
   }
 
   public async fold() {
-    return pipe_a(this.functions)();
+    return pipe_a2(this.functions);
   }
 
   public then(f: Function) {

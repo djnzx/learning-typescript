@@ -1,6 +1,7 @@
 import { FuncFlow } from "./funcflow";
 
-type Tuple2 = [number, number]
+type Tuple2G<F1, F2> = [F1, F2]
+type Tuple2 = Tuple2G<number, number>
 type Tuple3 = [number, number, number]
 type Tuple4 = [number, number, number, number]
 type Tuple5 = [number, number, number, number, number]
