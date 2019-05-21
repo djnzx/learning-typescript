@@ -2,5 +2,5 @@
   "watch": ["."],
   "ext": "ts",
   "ignore": ["./**/*.spec.ts"],
-  "exec": "ts-node ./flow.ts"
+  "exec": "ts-node ./pipes_playground.ts"
 }
