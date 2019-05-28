@@ -5,6 +5,8 @@ const plus3 = x => x + 3;
 const mult2 = x => x * 2;
 const mult3 = x => x * 3;
 
+const io_plus2__ = x => new IO( () => x + 2 );
+const io_plus2_ = x => new IO( () => plus2(x) );
 const io_plus2 = x => io.of( plus2(x) );
 const io_plus3 = x => io.of( plus3(x) );
 const io_mult2 = x => io.of( mult2(x) );
@@ -43,7 +45,7 @@ console.log(
 console.log(':chain:');
 console.log(
     step1                  // 1
-        .chain(io_plus2)   // 3
+        .chain(io_plus2_)   // 3
         .chain(io_mult2)   // 6
         .run()
 );
@@ -63,17 +65,11 @@ const fa = io.of(1);
 console.log( fa.ap(fab).run() );
 console.log( fab.ap_(fa).run() );
 
-
-
-/**
- * IO.map( val1 -> val2 )
- * IO.va1 -> IO.val2
- *
- * IO.chain( val1 -> IO(val2) )
- * IO.val1 -> IO.val2
- *
- *
- *
- *
- *
- */
+const val = io.of(7);
+const x2 = io.of(x => x * 2);
+const x3 = io.of(x => x * 3);
+console.log('apply, conscious thoughts');
+const applied_x2 = val.ap(x2);
+const applied_x3 = val.ap(x3);
+console.log(applied_x2.run());
+console.log(applied_x3.run());
