@@ -2,5 +2,5 @@
   "watch": ["."],
   "ext": "ts",
   "ignore": ["./**/*.spec.ts"],
-  "exec": "ts-node ./io_x1.ts"
+  "exec": "ts-node ./my-identity.ts"
 }

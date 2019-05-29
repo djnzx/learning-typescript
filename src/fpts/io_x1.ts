@@ -66,10 +66,23 @@ console.log( fa.ap(fab).run() );
 console.log( fab.ap_(fa).run() );
 
 const val = io.of(7);
+const x2_ = new IO(() => x => x * 2);
 const x2 = io.of(x => x * 2);
 const x3 = io.of(x => x * 3);
 console.log('apply, conscious thoughts');
-const applied_x2 = val.ap(x2);
+const applied_x2 = val.ap(x2_);
 const applied_x3 = val.ap(x3);
 console.log(applied_x2.run());
 console.log(applied_x3.run());
+
+console.log('applyFirst:');
+
+const log: Array<string> = [];
+const append = (message: string): IO<number> => new IO(() => log.push(message));
+
+const xx = append('a')
+  .applyFirst(append('b'))
+  .run();
+
+console.log(xx);
+console.log(log);
