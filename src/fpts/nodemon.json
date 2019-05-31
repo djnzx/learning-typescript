@@ -2,5 +2,5 @@
   "watch": ["."],
   "ext": "ts",
   "ignore": ["./**/*.spec.ts"],
-  "exec": "ts-node ./task-design.ts"
+  "exec": "ts-node ./io_v2.ts"
 }
