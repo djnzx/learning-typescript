@@ -16,7 +16,6 @@
     "chalk": "^2.4.2",
     "express": "^4.17.0",
     "fp-ts": "^1.18.2",
-    "immaculate_things": "^1.0.0",
     "pg": "^7.11.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^4.44.0",
