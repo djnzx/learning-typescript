@@ -18,6 +18,7 @@
     "fp-ts": "^1.18.2",
     "pg": "^7.11.0",
     "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.2",
     "sequelize": "^4.44.0",
     "sequelize-typescript": "^0.6.10",
     "ts-log-decorator": "latest",

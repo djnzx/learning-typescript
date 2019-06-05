@@ -18,7 +18,7 @@ const md5 = (path: string): TaskEither<string, string> => {
   return tryCatch(() => mkHash(path), message => `cannot create md5 hash: ${String(message)}`)
 }
 
-md5('sample1.ts')
+md5('promise1.ts')
   .run()
   .then(x => {
     console.log(x);

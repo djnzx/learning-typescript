@@ -1,0 +1,2 @@
+- a Promise is always asynchronous. Even if it’s immediately resolved.
+- an Observable can be synchronous / asynchronous

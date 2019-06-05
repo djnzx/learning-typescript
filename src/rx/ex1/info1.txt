@@ -1,0 +1,2 @@
+- Promise is eager
+- Observable is lazy.
