@@ -1,0 +1,24 @@
+tech goals:
+-----------
+1. TypeScript/ES 6,7,8,9
+2. React
+3. rxJS
+
+4. Scala / Dotty / Sbt
+5. Akka
+6. Play
+7. ZIO
+8. Kafka
+9. Redis /
+10. NoSQL / H2 / SQLite / Cassandra / Hazelcast / Apache Derby
+
+private:
+--------
+1. English C2.
+2. Spanish A2.
+
+old debt:
+---------
+1. house garden
+2. garage lightning
+3. water automation issues
