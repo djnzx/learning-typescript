@@ -12,6 +12,8 @@ tech goals:
 9. Redis /
 10. NoSQL / H2 / SQLite / Cassandra / Hazelcast / Apache Derby
 
+11. Docker + compose + CI
+
 private:
 --------
 1. English C2.
