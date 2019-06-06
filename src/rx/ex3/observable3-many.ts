@@ -1,35 +1,21 @@
-import { Observable, PartialObserver, Subscriber } from "rxjs";
+import { from, PartialObserver} from "rxjs";
+import { filter } from "rxjs/operators";
 
-const emitter = new Observable(observer => {
-  let counter = 0;
-  const interval = setInterval(() => {
-    if (counter<20) {
-      observer.next(counter++);
-    } else {
-      observer.complete();
-    }
+const data = [1, 2, 3, 4];
+console.log('-- creating an Observables');
+const emitter0 = from(data);
+const emitter1 = emitter0.pipe(filter(x => x <= 2));
+const emitter2 = emitter0.pipe(filter(x => x > 2));
 
-  }, 1000);
-
-  return () => clearInterval(interval);
-});
-
-const consumer1: PartialObserver<number> = {
-  next: value => { if (value < 10) console.log(`1st: ${value}`); },
-  // complete: () => { subscription1.unsubscribe(); }
-};
-const consumer2: PartialObserver<number> = {
-  next: value => { if (value > 10) console.log(`2nd: ${value}`); },
-  // complete: () => { subscription2.unsubscribe(); }
+console.log('-- declaring a consumer');
+const consumer0: PartialObserver<number> = {
+  next: value => console.log(`0th: ${value}`),
+  complete: () => {
+    console.log('0th: Done received');
+  }
 };
 
-const subscription1 = emitter.subscribe(consumer1);
-const subscription2 = emitter.subscribe(consumer2);
+console.log('-- subscribing');
+emitter0.subscribe(consumer0);
 
-setTimeout(
-  // () => { subscription1.unsubscribe(); subscription2.unsubscribe(); },
-  () => {},
-  200000
-);
-
-console.log('Before');
+console.log('-- done');
