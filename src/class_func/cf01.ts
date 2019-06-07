@@ -46,7 +46,7 @@ namespace CF {
   const userCreate = (name_: string, age_: number): UserI & UserB => ({
     name: name_,
     age: age_,
-    think() { console.log(`I'm thinking...`); },
+    think() { console.log(`I'm thinking...${this.age}`); },
     do() { console.log(`I'm doing...`); },
   });
 
