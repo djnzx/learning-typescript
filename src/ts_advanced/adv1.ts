@@ -65,3 +65,40 @@ const t12o2: T12OR = { b: 2 };
 type RWide = Readonly<Wide>;
 type NNWide = NonNullable<Wide>;
 
+namespace XX1 {
+  interface ILeft {
+    a1();
+    a2();
+  }
+  interface IRight {
+    a3();
+    a4();
+  }
+
+  type IFull = ILeft & IRight;
+
+  const left1: ILeft = {
+    a1() { console.log('left 1. A1') },
+    a2() { console.log('left 1. A2') },
+  };
+
+  const left2: ILeft = {
+    a1() { console.log('left 2. A1') },
+    a2() { console.log('left 2. A2') },
+  };
+
+  const right1: IRight = {
+    a3() { console.log('right 1. A3') },
+    a4() { console.log('right 1. A4') },
+  };
+
+  const right2: IRight = {
+    a3() { console.log('right 2. A3') },
+    a4() { console.log('right 2. A4') },
+  };
+
+
+
+
+
+}
