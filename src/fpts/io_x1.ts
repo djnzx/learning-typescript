@@ -1,10 +1,12 @@
 import {io, IO} from "fp-ts/lib/IO";
 
+// mappers
 const plus2 = x => x + 2;
 const plus3 = x => x + 3;
 const mult2 = x => x * 2;
 const mult3 = x => x * 3;
 
+// chainers
 const io_plus2__ = x => new IO( () => x + 2 );
 const io_plus2_ = x => new IO( () => plus2(x) );
 const io_plus2 = x => io.of( plus2(x) );
@@ -12,6 +14,7 @@ const io_plus3 = x => io.of( plus3(x) );
 const io_mult2 = x => io.of( mult2(x) );
 const io_mult3 = x => io.of( mult3(x) );
 
+// appliers
 const ap_plus2 = io.of( x => plus2(x) );
 const ap_plus3 = io.of( x => plus3(x) );
 const ap_mult2 = io.of( x => mult2(x) );
@@ -58,31 +61,43 @@ console.log(
         .run()
 );
 
-console.log(':apply_:');
-const fab = io.of(mult2);
-const fa = io.of(1);
+console.log(':applyFirst:');
+console.log(
+  step1 // 1
+    .applyFirst(new IO(() => {console.log('side effect'); return 5;}))
+    // .applySecond(io.of(z => {console.log('z:'+z*2); return z * 2}))
+    .run()
+);
 
-console.log( fa.ap(fab).run() );
-console.log( fab.ap_(fa).run() );
 
-const val = io.of(7);
-const x2_ = new IO(() => x => x * 2);
-const x2 = io.of(x => x * 2);
-const x3 = io.of(x => x * 3);
-console.log('apply, conscious thoughts');
-const applied_x2 = val.ap(x2_);
-const applied_x3 = val.ap(x3);
-console.log(applied_x2.run());
-console.log(applied_x3.run());
 
-console.log('applyFirst:');
 
-const log: Array<string> = [];
-const append = (message: string): IO<number> => new IO(() => log.push(message));
-
-const xx = append('a')
-  .applyFirst(append('b'))
-  .run();
-
-console.log(xx);
-console.log(log);
+//
+// console.log(':apply_:');
+// const fab = io.of(mult2);
+// const fa = io.of(1);
+//
+// console.log( fa.ap(fab).run() );
+// console.log( fab.ap_(fa).run() );
+//
+// const val = io.of(7);
+// const x2_ = new IO(() => x => x * 2);
+// const x2 = io.of(x => x * 2);
+// const x3 = io.of(x => x * 3);
+// console.log('apply, conscious thoughts');
+// const applied_x2 = val.ap(x2_);
+// const applied_x3 = val.ap(x3);
+// console.log(applied_x2.run());
+// console.log(applied_x3.run());
+//
+// console.log('applyFirst:');
+//
+// const log: Array<string> = [];
+// const append = (message: string): IO<number> => new IO(() => log.push(message));
+//
+// const xx = append('a')
+//   .applyFirst(append('b'))
+//   .run();
+//
+// console.log(xx);
+// console.log(log);
