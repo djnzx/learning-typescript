@@ -24,12 +24,12 @@ const isEnvVariableSet = (key: string) => {
 };
 
 const envVar = (key: string) => {
-  return process.env[key];
+  return process.env[key] || '';
 };
 
 varsRequired.forEach(key => {
   if (isEnvVariableSet(key)) {
-    console.log(`environment variable ${chalk.red(key)} required to run application`)
+    console.log(`environment variable ${chalk.red(key)} required to run application`);
     process.exit(-1);
   }
 });
@@ -37,6 +37,6 @@ varsRequired.forEach(key => {
 const message = (variable: string, value: string) => `Environment variable ${variable} is ${value}`;
 
 varsRequired.forEach(variable => {
-  const value = envVar(variable);
+  const value: string = envVar(variable);
   console.log(message(chalk.green(variable), chalk.green(value)));
 });

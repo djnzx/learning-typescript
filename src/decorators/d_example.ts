@@ -24,6 +24,7 @@ function validate(target: any, propertyName: string, descriptor: TypedPropertyDe
       }
     }
 
+    // @ts-ignore
     return method.apply(this, arguments);
   }
 }

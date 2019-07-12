@@ -1076,7 +1076,7 @@ const types07 = () => {
         layEggs();
     }
 
-    function getSmallPet(): Fish | Bird {
+    function getSmallPet(): Fish | Bird | null {
         return null;
     }
 
@@ -1093,12 +1093,12 @@ const types07 = () => {
         return (<Fish>pet).swim !== undefined;
     }
 
-    if (isFish(p)) {
-        p.swim();
-    }
-    else {
-        p.fly();
-    }
+    // if (isFish(p)) {
+    //     p.swim();
+    // }
+    // else {
+    //     p.fly();
+    // }
 
 };
 //types07();
@@ -1122,7 +1122,8 @@ const types08 = () => {
 const types09 = () => {
     function broken(name: string | null): string {
         function postfix(epithet: string) {
-            return name.charAt(0) + '.  the ' + epithet; // error, 'name' is possibly null
+            // return name.charAt(0) + '.  the ' + epithet; // error, 'name' is possibly null
+            return "1";
         }
         name = name || "Bob";
         return postfix("great");

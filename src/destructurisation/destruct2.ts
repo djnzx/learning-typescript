@@ -10,10 +10,10 @@ const orig = [
 ];
 
 const mapped = orig.map(el => el.b);
-const flatted = [].concat(...mapped)
-const distinct = Array.from(new Set(flatted))
+// const flatted = [].concat(...mapped);
+// const distinct = Array.from(new Set(flatted));
 
 console.log(orig)
 console.log(mapped)
-console.log(flatted)
-console.log(distinct)
+// console.log(flatted)
+// console.log(distinct)

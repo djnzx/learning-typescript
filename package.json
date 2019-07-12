@@ -23,6 +23,7 @@
     "sequelize": "^4.44.0",
     "sequelize-typescript": "^0.6.10",
     "ts-log-decorator": "latest",
+    "tsmonad": "^0.8.0",
     "tsmonad42": "^0.8.3",
     "typescript": "^3.4.5"
   },

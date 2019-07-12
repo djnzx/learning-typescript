@@ -1,16 +1,20 @@
 tech goals:
 -----------
 1. TypeScript/ES 6,7,8,9
-2. React
-3. rxJS
+2. React / Vue /
+3. rxJS / Observable / EventEmitter
+4. sart / flutter
 
-4. Scala / Dotty / Sbt
+4. Scala / Dotty / Sbt / Scala Notebook / Scastie
 5. Akka
 6. Play
 7. ZIO
 8. Kafka
-9. Redis /
-10. NoSQL / H2 / SQLite / Cassandra / Hazelcast / Apache Derby
+9. Redis
+10. NoSQL / H2 / SQLite / Cassandra / Hazelcast
+11. Slick
+12. Lagom
+
 
 11. Docker + compose + CI
 
