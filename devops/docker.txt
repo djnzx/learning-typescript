@@ -3,6 +3,8 @@
 # https://docs.docker.com/engine/examples/postgresql_service/
 ###
 
+docker exec -it $(docker ps | grep postgres | awk '{print  $1}') bash
+
 brew install docker
 brew install docker-compose
 brew install docker-machine

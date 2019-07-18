@@ -60,8 +60,8 @@ export class AddTodoAction implements Action {
 
   readonly type = TodoActionEnum.AddTodo;
   payload: Todo = {
-    id: null,
-    todo: null,
+    id: '',
+    todo: '',
     isComplete: false
   };
 
@@ -126,48 +126,48 @@ export const todoReducer: Reducer<TodoState> = (
 
 const todoStore: Store<TodoState> = new Store<TodoState>(todoReducer, initialState);
 
-todoStore.subscribe(() => {
-  const { todos } = todoStore.getState();
-  todoListElem.innerHTML = !!todos.length ?
-    todos.map(
-      ({ id, todo, isComplete }) => {
-        return `<li id="${id}" class="${isComplete ? 'strike-out' : ''}">
-                          ${todo} | <a id="${id}" href="javascript:void(0)">delete</a>
-                        </li>`;
-      }
-    ).join('') : `<li>No todos found</li>`;
-});
+// todoStore.subscribe(() => {
+//   const { todos } = todoStore.getState();
+//   todoListElem.innerHTML = !!todos.length ?
+//     todos.map(
+//       ({ id, todo, isComplete }) => {
+//         return `<li id="${id}" class="${isComplete ? 'strike-out' : ''}">
+//                           ${todo} | <a id="${id}" href="javascript:void(0)">delete</a>
+//                         </li>`;
+//       }
+//     ).join('') : `<li>No todos found</li>`;
+// });
 
-// listener to handle todo removal and toggle
-todoListElem.addEventListener('click', ({ target }: MouseEvent) => {
-  const elem = target as HTMLElement;
-  switch (elem.tagName.toLowerCase()) {
-    case 'li': {
-      const id = elem.getAttribute('id');
-      // action dispatched to the store
-      todoStore.dispatch(new ToggleTodoAction({ id }));
-      break;
-    }
-    case 'a': {
-      const id = elem.getAttribute('id');
-      // action dispatched to the store
-      todoStore.dispatch(new RemoveTodoAction({ id }));
-      break;
-    }
-  }
-  return;
-}, false);
+// // listener to handle todo removal and toggle
+// todoListElem.addEventListener('click', ({ target }: MouseEvent) => {
+//   const elem = target as HTMLElement;
+//   switch (elem.tagName.toLowerCase()) {
+//     case 'li': {
+//       const id = elem.getAttribute('id');
+//       // action dispatched to the store
+//       todoStore.dispatch(new ToggleTodoAction({ id }));
+//       break;
+//     }
+//     case 'a': {
+//       const id = elem.getAttribute('id');
+//       // action dispatched to the store
+//       todoStore.dispatch(new RemoveTodoAction({ id }));
+//       break;
+//     }
+//   }
+//   return;
+// }, false);
 
-addButtonElem.addEventListener('click', (e) => {
-  const text = todoInputElem.value.trim();
-  if (text) {
-    const todo: Partial<Todo> = {
-      id: nanoid(), // external third party api to produce unique id
-      todo: text
-    };
-    // action dispatched to the store
-    todoStore.dispatch(new AddTodoAction(todo));
-    todoInputElem.value = '';
-  }
-  return;
-});
+// addButtonElem.addEventListener('click', (e) => {
+//   const text = todoInputElem.value.trim();
+//   if (text) {
+//     const todo: Partial<Todo> = {
+//       id: nanoid(), // external third party api to produce unique id
+//       todo: text
+//     };
+//     // action dispatched to the store
+//     todoStore.dispatch(new AddTodoAction(todo));
+//     todoInputElem.value = '';
+//   }
+//   return;
+// });

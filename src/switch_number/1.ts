@@ -10,7 +10,9 @@ namespace abc {
   console.log(action(0));
   console.log(action(1));
   console.log(action(2));
+  // @ts-ignore
   console.log(action(undefined));
+  // @ts-ignore
   console.log(action(null));
 
 }
